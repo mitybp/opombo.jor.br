@@ -1,17 +1,26 @@
 "use client";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Card from "./components/card";
 import { db } from "./firebase";
-import { Container } from "./styled";
+import { Container, TagFilter } from "./styled";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const [selectedTag, setSelectedTag] = useState("");
+
+  
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const q = query(collection(db, "posts"), orderBy("date", "asc"));
+        let q;
+        if(selectedTag===""){
+          q = query(collection(db, "posts"), orderBy("date", "asc"));
+        }else{
+          q = query(collection(db, "posts"), where("tag", "==", selectedTag), orderBy("date", "asc"));
+        }
         const querySnapshot = await getDocs(q);
         const newPosts = querySnapshot.docs.reverse().map((doc) => ({
           id: doc.id,
@@ -22,12 +31,8 @@ export default function Home() {
         console.error("[fetchPosts()]: ", error);
       }
     };
-    fetchPosts();
-  }, []);
-
-  const filterByTag = (tag) => {
-    
-  }
+    fetchPosts()
+  }, [selectedTag]);
 
   const format = () => {
     return str
@@ -52,10 +57,48 @@ export default function Home() {
     "Contos e crônicas",
     "Escola Por Dentro",
   ];
+  let tagColors = {
+    "Exposição artística": "#B9EDC8",
+    "Ciência e filosofia": "#A8C6C3",
+    Eventos: "#E4C9A2",
+    Notícia: "#B9E8ED",
+    "Pesquisa e estatística": "#FFA8B3",
+    "Artigo de opinião": "#E6B9ED",
+    "Aula de campo": "#A8C6FF",
+    "Contos e crônicas": "#E1EDB9",
+    "Escola Por Dentro": "#FEE57E",
+  };
 
   return (
     <Container>
-      
+      <p style={{ fontSize: 20 }}>Filtrar por tag:</p>
+      <TagFilter>
+        <button
+          style={{
+            borderColor: selectedTag == "" ? "#f4f4f4" : "#ccc",
+          }}
+          onClick={() => {
+            setSelectedTag("");
+          }}
+          key={"Todas"}
+        >
+          Todas
+        </button>
+        {postTagsOptions.map((tag) => (
+          <button
+            style={{
+              backgroundColor: selectedTag == tag ? tagColors[tag] : "#f4f4f4",
+              borderColor: selectedTag == tag ? tagColors[tag] : "#ccc",
+            }}
+            onClick={() => {
+              setSelectedTag(tag);
+            }}
+            key={tag}
+          >
+            {tag}
+          </button>
+        ))}
+      </TagFilter>
       <section className="card-list">
         {posts.map((post) => (
           <Card key={post.title} data={post} />

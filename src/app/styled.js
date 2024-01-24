@@ -37,11 +37,11 @@ export const Button =
         padding-left: 6px;
       }
     }
-    &.small{
-        width: 25px;
-        height: 25px;
-        font-size: 14px;
-        padding: 0;
+    &.small {
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+      padding: 0;
     }
   `;
 
@@ -145,7 +145,7 @@ export const HeaderContainer = styled.header`
       }
     }
   }
-  .buttons{
+  .buttons {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -153,45 +153,53 @@ export const HeaderContainer = styled.header`
 `;
 
 export const CardContainer = styled.div`
-    text-align: initial;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 10px;
+  text-align: initial;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 28rem;
+  a {
+    text-decoration: none;
+    color: #000;
+    font-size: 22px;
+  }
+  section {
     display: flex;
-    flex-direction: column;
-    a{
-        text-decoration: none;
-        color: #000;
-        font-size: 22px;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      p.tag {
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 14px;
+      }
     }
-    section{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        div{
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            p.tag{
-                padding: 2px 8px;
-                border-radius: 6px;
-                font-size: 14px;
-            }
-        }
-    }
-`
+  }
+  @media (max-width: 300px) {
+    width: 100%;
+  }
+  @media (max-width: 550px) {
+    width: 80%;
+  }
+`;
 
 export const TagFilter = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    button{
-        cursor: pointer;
-        outline: none;
-        background-color: #f4f4f4;
-        border: 1px solid #ccc;
-        padding: 2px 6px;
-        border-radius: 6px;
-    }
-`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 20px;
+  button {
+    cursor: pointer;
+    outline: none;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+`;
