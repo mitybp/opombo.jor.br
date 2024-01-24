@@ -3,23 +3,28 @@ import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Card from "./components/card";
 import { db } from "./firebase";
-import { Container, TagFilter } from "./styled";
+import { Button, Container, Switch, TagFilter } from "./styled";
 import toast from "react-hot-toast";
+import { Funnel } from "@phosphor-icons/react";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [selectedTag, setSelectedTag] = useState("");
-
-  
+  const [orderInput, setOrderInput] = useState("asc");
+  const [openFilter, setOpenFilter] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         let q;
-        if(selectedTag===""){
-          q = query(collection(db, "posts"), orderBy("date", "asc"));
-        }else{
-          q = query(collection(db, "posts"), where("tag", "==", selectedTag), orderBy("date", "asc"));
+        if (selectedTag === "") {
+          q = query(collection(db, "posts"), orderBy("date", orderInput));
+        } else {
+          q = query(
+            collection(db, "posts"),
+            where("tag", "==", selectedTag),
+            orderBy("date", orderInput)
+          );
         }
         const querySnapshot = await getDocs(q);
         const newPosts = querySnapshot.docs.reverse().map((doc) => ({
@@ -31,8 +36,8 @@ export default function Home() {
         console.error("[fetchPosts()]: ", error);
       }
     };
-    fetchPosts()
-  }, [selectedTag]);
+    fetchPosts();
+  }, [selectedTag, orderInput]);
 
   const format = () => {
     return str
@@ -71,33 +76,60 @@ export default function Home() {
 
   return (
     <Container>
-      <p style={{ fontSize: 20 }}>Filtrar por tag:</p>
       <TagFilter>
-        <button
-          style={{
-            borderColor: selectedTag == "" ? "#f4f4f4" : "#ccc",
-          }}
-          onClick={() => {
-            setSelectedTag("");
-          }}
-          key={"Todas"}
+        <Button
+          className="header filter"
+          onClick={() => setOpenFilter(!openFilter)}
         >
-          Todas
-        </button>
-        {postTagsOptions.map((tag) => (
-          <button
-            style={{
-              backgroundColor: selectedTag == tag ? tagColors[tag] : "#f4f4f4",
-              borderColor: selectedTag == tag ? tagColors[tag] : "#ccc",
-            }}
-            onClick={() => {
-              setSelectedTag(tag);
-            }}
-            key={tag}
-          >
-            {tag}
-          </button>
-        ))}
+          <Funnel />
+          <span>Filtros</span>
+        </Button>
+        <div className={`float ${openFilter ? "active" : ""}`}>
+          <p>Filtrar pela tag:</p>
+          <section>
+            <button
+              style={{
+                backgroundColor: selectedTag == "" ? "#ffa38a" : "#f4f4f4",
+                borderColor: selectedTag == "" ? "#ffa38a" : "#ccc",
+              }}
+              onClick={() => {
+                setSelectedTag("");
+              }}
+              key={"Todas"}
+            >
+              Todas
+            </button>
+            {postTagsOptions.map((tag) => (
+              <button
+                style={{
+                  backgroundColor:
+                    selectedTag == tag ? tagColors[tag] : "#f4f4f4",
+                  borderColor: selectedTag == tag ? tagColors[tag] : "#ccc",
+                }}
+                onClick={() => {
+                  setSelectedTag(tag);
+                }}
+                key={tag}
+              >
+                {tag}
+              </button>
+            ))}
+          </section>
+          <p>Ordem:</p>
+          <div className="center">
+            <span>Crescente</span>
+            <Switch>
+              <input
+                type="checkbox"
+                onClick={() =>
+                  setOrderInput(orderInput == "asc" ? "desc" : "asc")
+                }
+              />
+              <span className="slider" />
+            </Switch>
+            <span>Decrescente</span>
+          </div>
+        </div>
       </TagFilter>
       <section className="card-list">
         {posts.map((post) => (

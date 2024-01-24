@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import { useState } from "react";
 import { Button, HeaderContainer, Dropdown } from "../styled";
-import { List, MagnifyingGlass } from "@phosphor-icons/react";
+import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
 
 const Header = () => {
+  const [openMenu, setOpenMenu] = useState(false);
   return (
     <HeaderContainer>
       <a className="logo" href="/">
@@ -19,11 +20,12 @@ const Header = () => {
           <MagnifyingGlass />
           <span>Pesquisar</span>
         </Button>
-        <Dropdown>
-          <span>
-            <List />
-          </span>
-          <div className="items">
+        <Button className="header square" onClick={()=>setOpenMenu(!openMenu)}>
+          {
+            openMenu?<X/>:<List/>
+          }
+        </Button>
+        <div className="items" style={{display: openMenu?"flex":"none"}}>
             <a href="/sobre-nos">Sobre nós</a>
             <a href="/espaco-aberto">Espaço Aberto</a>
             <a href="https://sistema.opombo.jor.br/" target="_blank">
@@ -33,7 +35,6 @@ const Header = () => {
               Instagram
             </a>
           </div>
-        </Dropdown>
       </section>
     </HeaderContainer>
   );
