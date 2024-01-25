@@ -103,6 +103,7 @@ export default function Home() {
               }}
               onClick={() => {
                 setSelectedTag("");
+                setOpenFilter(false);
               }}
               key={"Todas"}
             >
@@ -117,6 +118,7 @@ export default function Home() {
                 }}
                 onClick={() => {
                   setSelectedTag(tag);
+                  setOpenFilter(false);
                 }}
                 key={tag}
               >

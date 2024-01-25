@@ -70,63 +70,6 @@ export const Input = styled.input`
   width: 100%;
 `;
 
-export const Dropdown = styled.div`
-  display: inline-block;
-  position: relative;
-  span {
-    background-color: #f4f4f4;
-    height: 35px;
-    width: 35px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: inherit;
-    border: 1px solid #ccc;
-    outline: none;
-  }
-  .items {
-    position: absolute;
-    top: 38px;
-    right: 0;
-    padding: 6px;
-    gap: 4px;
-    width: 14rem;
-    display: none;
-    flex-direction: column;
-    background-color: #fff;
-    box-shadow: 0 0 10px 2px #ccc;
-    border: 1px solid #ccc;
-    z-index: 1;
-    border-radius: 8px;
-    a {
-      background-color: transparent;
-      padding: 4px 10px;
-      border-radius: 8px;
-      color: #000;
-      border: none;
-      outline: none;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      cursor: pointer;
-      background-color: #f4f4f4;
-      border: 1px solid #ccc;
-    }
-  }
-  &:hover {
-    span {
-      background-color: #eee;
-    }
-    .items {
-      display: flex;
-    }
-  }
-`;
-
 export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
@@ -163,6 +106,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     gap: 4px;
+    transition: 0.2s ease-in-out all;
     .items {
       position: absolute;
       top: 50px;
@@ -170,13 +114,15 @@ export const HeaderContainer = styled.header`
       padding: 6px;
       gap: 4px;
       width: 14rem;
-      display: none;
+      display: flex;
       flex-direction: column;
       background-color: #fff;
       box-shadow: 0 0 10px 2px #ccc;
       border: 1px solid #ccc;
       z-index: 1;
       border-radius: 8px;
+      opacity: 0;
+      visibility: hidden;
       a {
         background-color: transparent;
         padding: 4px 10px;
@@ -245,9 +191,12 @@ export const TagFilter = styled.div`
   }
   div.float {
     &.active {
-      display: block;
+      opacity: 1;
+      visibility: visible;
     }
-    display: none;
+    transition: 0.2s ease-in-out all;
+    opacity: 0;
+    visibility: hidden;
     position: fixed;
     width: 18rem;
     left: 10px;
@@ -385,6 +334,28 @@ export const PostContainer = styled.div`
       padding: 2px 8px;
       border-radius: 6px;
       font-size: 14px;
+    }
+  }
+  div.buttons{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    div.group{
+        display: flex;
+        align-items: center;
+        a{
+            &:first-child{
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            &:nth-child(2){
+                border-radius: 0;
+            }
+            &:last-child{
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
     }
   }
 `;

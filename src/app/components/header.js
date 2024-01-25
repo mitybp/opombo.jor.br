@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
-import { Button, HeaderContainer, Dropdown } from "../styled";
 import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
+import { useState } from "react";
+import { Button, HeaderContainer } from "../styled";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -20,22 +20,22 @@ const Header = () => {
           <MagnifyingGlass />
           <span>Pesquisar</span>
         </Button>
-        <Button className="header square" onClick={()=>setOpenMenu(!openMenu)}>
-          {
-            openMenu?<X/>:<List/>
-          }
+        <Button
+          className="header square"
+          onClick={() => setOpenMenu(!openMenu)}
+        >
+          {openMenu ? <X /> : <List />}
         </Button>
-        <div className="items" style={{display: openMenu?"flex":"none"}}>
-            <a href="/sobre">Sobre nós</a>
-            <a href="/salvos">Matérias salvas</a>
-            <a href="/espaco-aberto">Espaço Aberto</a>
-            <a href="https://sistema.opombo.jor.br/" target="_blank">
-              Sistema
-            </a>
-            <a href="https://instagram.com/opombo.jornal/" target="_blank">
-              Instagram
-            </a>
-          </div>
+        <div className="items" style={{ opacity: openMenu ? 1 : 0, visibility: openMenu ? "visible" : "hidden" }}>
+          <a href="/sobre">Sobre nós</a>
+          <a href="/salvos">Matérias salvas</a>
+          <a href="https://sistema-opombo.vercel.app/" target="_blank">
+            Sistema
+          </a>
+          <a href="https://instagram.com/opombo.jornal/" target="_blank">
+            Instagram
+          </a>
+        </div>
       </section>
     </HeaderContainer>
   );
