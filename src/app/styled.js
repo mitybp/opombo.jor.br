@@ -322,6 +322,7 @@ export const Loader = styled.div`
 export const PostContainer = styled.div`
   h1.title {
     font-size: 2em;
+    text-align: start;
   }
   div.infos {
     display: flex;
