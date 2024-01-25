@@ -13,7 +13,6 @@ import { db } from "../firebase";
 import { Container, Input, Loader } from "../styled";
 
 const Pesquisar = () => {
-  window.document.title = "Pesquisar - Jornal O Pombo";
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState("");

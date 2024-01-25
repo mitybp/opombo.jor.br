@@ -6,7 +6,6 @@ import { db } from "../firebase";
 import Card from "../components/card";
 
 const Salvos = () => {
-  window.document.title = "Salvos - Jornal O Pombo";
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {

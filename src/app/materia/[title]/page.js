@@ -26,7 +26,6 @@ const Post = ({ params }) => {
         if (docSnapshot.exists()) {
           let docData = docSnapshot.data();
           setData(docData);
-          window.document.title = `${docData.title} - Jornal O Pombo`
         }
       } catch (error) {
         console.error("[fetchPosts()]: ", error);

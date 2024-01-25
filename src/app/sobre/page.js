@@ -2,7 +2,6 @@
 import { Container } from "../styled";
 
 const Sobre = () => {
-  document.title = "Sobre nós - Jornal O Pombo";
   return (
     <Container>
       <h1>Sobre nós</h1>
