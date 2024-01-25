@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bytemd/plugin-breaks": "^1.21.0",
+    "@bytemd/plugin-gemoji": "^1.21.0",
+    "@bytemd/plugin-gfm": "^1.21.0",
+    "@bytemd/react": "^1.21.0",
     "@phosphor-icons/react": "^2.0.15",
     "firebase": "^10.7.2",
     "next": "14.1.0",

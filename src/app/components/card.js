@@ -1,8 +1,22 @@
 "use client";
 import { BookmarkSimple } from "@phosphor-icons/react";
 import { Button, CardContainer } from "../styled";
+import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 const Card = ({ data }) => {
+    const [isSaved, setIsSaved] = useState(false);
+
+    useEffect(()=>{
+        if(JSON.parse(localStorage.getItem("saved")).includes(data.title)){
+            setIsSaved(true);
+        }else{
+            setIsSaved(false)
+        }
+    })
+
+    if(localStorage.getItem("saved")==null) localStorage.setItem("saved", "[]")
+
   let tagColors = {
     "Exposição artística": "#B9EDC8",
     "Ciência e filosofia": "#A8C6C3",
@@ -35,6 +49,21 @@ const Card = ({ data }) => {
     const newDate = `${day}/${month}/${year}`;
     return newDate;
   };
+  const savePost = () => {
+    let saved = JSON.parse(localStorage.getItem("saved"));
+
+    if(saved.includes(data.title)){
+        saved.splice(saved.indexOf(data.title), 1);
+        localStorage.setItem("saved", JSON.stringify(saved));
+        setIsSaved(false);
+        toast.error("Matéria removida dos salvos!")
+    }else{
+        saved.push(data.title);
+        localStorage.setItem("saved", JSON.stringify(saved));
+        setIsSaved(true);
+        toast.success("Matéria adicionada aos salvos!")
+    }
+  }
   return (
     <CardContainer>
       <a href={`/materia/${format(data.title)}`}>{data.title}</a>
@@ -51,8 +80,8 @@ const Card = ({ data }) => {
           {formatDate(data.date)}
         </div>
         <div>
-          <Button className="small">
-            <BookmarkSimple />
+          <Button className="small" onClick={()=>savePost()}>
+            <BookmarkSimple weight={isSaved?"fill":"regular"} />
           </Button>
         </div>
       </section>

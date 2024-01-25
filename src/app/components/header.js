@@ -26,7 +26,8 @@ const Header = () => {
           }
         </Button>
         <div className="items" style={{display: openMenu?"flex":"none"}}>
-            <a href="/sobre-nos">Sobre nós</a>
+            <a href="/sobre">Sobre nós</a>
+            <a href="/salvos">Matérias salvas</a>
             <a href="/espaco-aberto">Espaço Aberto</a>
             <a href="https://sistema.opombo.jor.br/" target="_blank">
               Sistema

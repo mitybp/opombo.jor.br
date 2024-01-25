@@ -1,11 +1,10 @@
 "use client";
+import { Funnel } from "@phosphor-icons/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Card from "./components/card";
 import { db } from "./firebase";
-import { Button, Container, Switch, TagFilter } from "./styled";
-import toast from "react-hot-toast";
-import { Funnel } from "@phosphor-icons/react";
+import { Button, Container, Loader, Switch, TagFilter } from "./styled";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -13,9 +12,12 @@ export default function Home() {
   const [orderInput, setOrderInput] = useState("asc");
   const [openFilter, setOpenFilter] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        setIsLoading(true);
         let q;
         if (selectedTag === "") {
           q = query(collection(db, "posts"), orderBy("date", orderInput));
@@ -34,6 +36,8 @@ export default function Home() {
         setPosts(newPosts);
       } catch (error) {
         console.error("[fetchPosts()]: ", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPosts();
@@ -76,6 +80,11 @@ export default function Home() {
 
   return (
     <Container>
+      {isLoading && (
+        <Loader>
+          <span />
+        </Loader>
+      )}
       <TagFilter>
         <Button
           className="header filter"

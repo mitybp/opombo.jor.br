@@ -7,9 +7,12 @@ export const Container = styled.div`
   margin-bottom: 40px;
   font-size: 16px;
 
-  &p {
+  p {
     padding: 4px 0;
     font-size: 18px;
+    &::first-letter {
+      padding-left: 10px;
+    }
   }
   @media (max-width: 550px) {
     margin-inline: 14px;
@@ -36,11 +39,11 @@ export const Button =
       span {
         padding-left: 6px;
       }
-      @media (max-width: 450px){
-          width: 35px;
-          padding: 0;
-        span{
-            display: none;
+      @media (max-width: 450px) {
+        width: 35px;
+        padding: 0;
+        span {
+          display: none;
         }
       }
     }
@@ -50,9 +53,9 @@ export const Button =
       font-size: 14px;
       padding: 0;
     }
-    &.square{
-        width: 35px;
-        padding: 0;
+    &.square {
+      width: 35px;
+      padding: 0;
     }
   `;
 
@@ -217,6 +220,9 @@ export const CardContainer = styled.div`
       align-items: center;
       gap: 4px;
       p.tag {
+        &::first-letter {
+          padding-left: 0;
+        }
         padding: 2px 8px;
         border-radius: 6px;
         font-size: 14px;
@@ -233,7 +239,7 @@ export const CardContainer = styled.div`
 
 export const TagFilter = styled.div`
   .filter {
-    position: absolute;
+    position: fixed;
     top: 60px;
     left: 10px;
   }
@@ -242,7 +248,7 @@ export const TagFilter = styled.div`
       display: block;
     }
     display: none;
-    position: absolute;
+    position: fixed;
     width: 18rem;
     left: 10px;
     border: 1px solid #ccc;
@@ -269,6 +275,7 @@ export const TagFilter = styled.div`
         border: 1px solid #ccc;
         padding: 2px 6px;
         border-radius: 6px;
+        font-size: 14px;
       }
     }
     div.center {
@@ -319,4 +326,97 @@ export const Switch = styled.label`
       transition: 0.4s;
     }
   }
+`;
+
+export const Loader = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: #ffffff99;
+  backdrop-filter: blur(5px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    width: 48px;
+    height: 48px;
+    border: 3px solid dodgerblue;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    &::after {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-bottom-color: #000;
+    }
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+`;
+
+export const PostContainer = styled.div`
+  h1.title {
+    font-size: 2em;
+  }
+  div.infos {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    p::first-letter {
+      padding-left: 0;
+    }
+    p.tag {
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  }
+`;
+
+export const ScrollIndictorContainer = styled.div`
+  width: 100%;
+  height: 8px;
+  background-color: transparent;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  div {
+    height: 8px;
+    max-width: 100%;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+`;
+
+export const PostGoTopButton = styled.a`
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #000;
 `;

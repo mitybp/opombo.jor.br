@@ -32,3 +32,55 @@ section.card-list{
   justify-content: start;
   gap: 10px;
 }
+
+.markdown-body{
+  margin-top: 20px;
+}
+.markdown-body h1{
+  font-size: calc(1.375rem + 1.5vw);
+}
+.markdown-body h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+
+.markdown-body h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+
+.markdown-body h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+.markdown-body h5 {
+  font-size: 1.25rem;
+}
+
+.markdown-body h6 {
+  font-size: 1rem;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 2rem;
+}
+
+.markdown-body ol,
+.markdown-body ul,
+.markdown-body dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ul,
+.markdown-body ol ul,
+.markdown-body ul ol {
+  margin-bottom: 0;
+}
+.markdown-body a{
+  color: dodgerblue;
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline dodgerblue;
+  }
+}
