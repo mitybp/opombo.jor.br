@@ -6,6 +6,7 @@ import {
   orderBy,
   query,
   startAt,
+  where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Card from "../components/card";
@@ -24,9 +25,8 @@ const Pesquisar = () => {
         if (input.trim() !== "") {
           let q = query(
             col,
-            orderBy("title"),
-            startAt(input.normalize()),
-            endAt(input.normalize() + "\uf8ff")
+            where("query", ">=", input.toLowerCase()),
+            where("query", "<=", input.toLowerCase() + "\uf8ff")
           );
 
           let querySnapshot = await getDocs(q);
