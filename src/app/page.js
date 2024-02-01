@@ -98,8 +98,8 @@ export default function Home() {
           <section>
             <button
               style={{
-                backgroundColor: selectedTag == "" ? "#ffa38a" : "#f4f4f4",
-                borderColor: selectedTag == "" ? "#ffa38a" : "#ccc",
+                backgroundColor: "#f4f4f4",
+                borderColor: selectedTag == "" ? "#f4f4f4" : "#ccc",
               }}
               onClick={() => {
                 setSelectedTag("");
