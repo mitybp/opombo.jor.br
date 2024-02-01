@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import Header from "./components/header";
 import "./globals.css";
+import Footer from "./components/footer";
 
 export const metadata = {
   title: "Jornal O Pombo",
@@ -10,7 +11,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body><Toaster position="top-center"/><Header/>{children}</body>
+      <body>
+        <Toaster position="top-center" />
+        <Header />
+        <>
+          {children}
+          <Footer />
+        </>
+      </body>
     </html>
   );
 }

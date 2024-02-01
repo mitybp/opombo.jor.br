@@ -13,7 +13,15 @@ export const Container = styled.div`
     &::first-letter {
       padding-left: 10px;
     }
+    a {
+      color: dodgerblue;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
+
   @media (max-width: 550px) {
     margin-inline: 14px;
   }
@@ -337,26 +345,26 @@ export const PostContainer = styled.div`
       font-size: 14px;
     }
   }
-  div.buttons{
+  div.buttons {
     display: flex;
     align-items: center;
     gap: 6px;
-    div.group{
-        display: flex;
-        align-items: center;
-        a{
-            &:first-child{
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-            &:nth-child(2){
-                border-radius: 0;
-            }
-            &:last-child{
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-            }
+    div.group {
+      display: flex;
+      align-items: center;
+      a {
+        &:first-child {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
         }
+        &:nth-child(2) {
+          border-radius: 0;
+        }
+        &:last-child {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
     }
   }
 `;
@@ -391,4 +399,23 @@ export const PostGoTopButton = styled.a`
   font-size: 16px;
   border-radius: 8px;
   color: #000;
+`;
+
+export const FooterContainer = styled.footer`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-inline: 40px;
+  a {
+    color: dodgerblue;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
