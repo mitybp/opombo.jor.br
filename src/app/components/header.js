@@ -29,6 +29,7 @@ const Header = () => {
         <div className="items" style={{ opacity: openMenu ? 1 : 0, visibility: openMenu ? "visible" : "hidden" }}>
           <a href="/sobre">Sobre nós</a>
           <a href="/salvos">Matérias salvas</a>
+          <a href="/galeria">Galeria</a>
           <a href="https://sistema-opombo.vercel.app/" target="_blank">
             Sistema
           </a>

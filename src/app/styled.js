@@ -419,3 +419,10 @@ export const FooterContainer = styled.footer`
     }
   }
 `;
+
+export const ImgCardContainer = styled.div`
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+`
